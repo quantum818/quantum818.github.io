@@ -1,0 +1,9 @@
+p {
+    font-size: 8em;
+}
+
+p,img{
+    /* display: block; */
+    text-align: center;
+}
+
