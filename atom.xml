@@ -6,7 +6,7 @@
   <link href="https://blog.higuchi.xyz/atom.xml" rel="self"/>
   
   <link href="https://blog.higuchi.xyz/"/>
-  <updated>2022-04-20T15:44:36.151Z</updated>
+  <updated>2022-03-31T13:38:52.379Z</updated>
   <id>https://blog.higuchi.xyz/</id>
   
   <author>
@@ -15,29 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</title>
-    <link href="https://blog.higuchi.xyz/2022/04/17/2022-4-17/"/>
-    <id>https://blog.higuchi.xyz/2022/04/17/2022-4-17/</id>
-    <published>2022-04-16T18:07:10.000Z</published>
-    <updated>2022-04-20T15:44:36.151Z</updated>
-    
-    
-    <summary type="html">和穿的跟娘炮似的长州佬在一起怎么能搞好政治呢</summary>
-    
-    
-    
-    
-    <category term="胡说八道" scheme="https://blog.higuchi.xyz/tags/%E8%83%A1%E8%AF%B4%E5%85%AB%E9%81%93/"/>
-    
-    <category term="杂谈" scheme="https://blog.higuchi.xyz/tags/%E6%9D%82%E8%B0%88/"/>
-    
-    <category term="历史虚无" scheme="https://blog.higuchi.xyz/tags/%E5%8E%86%E5%8F%B2%E8%99%9A%E6%97%A0/"/>
-    
-    <category term="大概是给牛哥的生日贺文" scheme="https://blog.higuchi.xyz/tags/%E5%A4%A7%E6%A6%82%E6%98%AF%E7%BB%99%E7%89%9B%E5%93%A5%E7%9A%84%E7%94%9F%E6%97%A5%E8%B4%BA%E6%96%87/"/>
-    
-  </entry>
   
   <entry>
     <title>搭建基于CLion的STM32嵌入式开发环境</title>
