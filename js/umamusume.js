@@ -67,7 +67,12 @@ fetch(url).then(response=>response.json()).then(response=>{
 //
 Object.keys(params2).forEach(function(key){url += "&" + key + "=" + params2[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('马娘卡池')] + '">' + ('马娘卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
+    for(var data in response.query.search){
+        if(response.query.search[data].title.indexOf("卡池")!=-1){
+            break;
+        }
+    }
+    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('马娘卡池')] + '">' + ('马娘卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
     document.getElementById('weibo-container').innerHTML = html
 }).catch(function(error) {
@@ -76,7 +81,12 @@ fetch(url).then(response=>response.json()).then(response=>{
 //
 Object.keys(params4).forEach(function(key){url += "&" + key + "=" + params4[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('支援卡池')] + '">' + ('支援卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
+    for(var data in response.query.search){
+        if(response.query.search[data].title.indexOf("卡池")!=-1){
+            break;
+        }
+    }
+    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('支援卡池')] + '">' + ('支援卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
     document.getElementById('weibo-container').innerHTML = html
 }).catch(function(error) {
