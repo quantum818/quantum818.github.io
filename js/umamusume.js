@@ -1,5 +1,5 @@
-let html = '<style>.umamusume-newUma{background:#ff3852}.umamusume-twitter{background:#ff9406}.weibo-jyzy{background:#ffc000}.umamusume-supportCard{background:#00b7ee}.weibo-adrecommend{background:#febd22}.weibo-friend{background:#8fc21e}.weibo-boom{background:#bd0000}.umamusume-notice{background:#ff6f49}.umamusume-notice-ad{background:#332B33}.umamusume-activity{background:#f86400}#weibo-container{overflow-y:auto;-ms-overflow-style:none;scrollbar-width:none}#weibo-container::-webkit-scrollbar{display:none}.weibo-list-item{display:flex;flex-direction:row;justify-content:space-between;flex-wrap:nowrap}.weibo-title{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:auto}.weibo-num{float:right}.weibo-hotness{display:inline-block;padding:0 6px;transform:scale(.8) translateX(-3px);color:#fff;border-radius:8px}</style>'
-html += '<div class="weibo-list">'
+let html = '<style>.umamusume-newUma{background:#ff3852}.umamusume-twitter{background:#ff9406}.umamusume-supportCard{background:#00b7ee}.umamusume-num{float:right}.umamusume-hotness{display:inline-block;padding:0 6px;transform:scale(.8) translateX(-3px);color:#fff;border-radius:8px}</style>'
+html += '<div class="uma-list">'
 let hotness = {
     '日服公告': 'umamusume-notice-ad',
     '周报速览': 'umamusume-twitter',
@@ -58,9 +58,9 @@ url = url + "?origin=*";
 //
 Object.keys(params1).forEach(function(key){url += "&" + key + "=" + params1[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('日服公告')] + '">' + ('日服公告') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('日服公告')] + '">' + ('日服公告') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
     html += '</div>'
-    document.getElementById('weibo-container').innerHTML = html
+    document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
     console.log(error);
 });
@@ -72,9 +72,9 @@ fetch(url).then(response=>response.json()).then(response=>{
             break;
         }
     }
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('马娘卡池')] + '">' + ('马娘卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('马娘卡池')] + '">' + ('马娘卡池') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
-    document.getElementById('weibo-container').innerHTML = html
+    document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
     console.log(error);
 });
@@ -86,26 +86,26 @@ fetch(url).then(response=>response.json()).then(response=>{
             break;
         }
     }
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('支援卡池')] + '">' + ('支援卡池') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('支援卡池')] + '">' + ('支援卡池') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
-    document.getElementById('weibo-container').innerHTML = html
+    document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
     console.log(error);
 });
 //
 Object.keys(params3).forEach(function(key){url += "&" + key + "=" + params3[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('当前活动')] + '">' + ('当前活动') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('当前活动')] + '">' + ('当前活动') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
     html += '</div>'
-    document.getElementById('weibo-container').innerHTML = html
+    document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
     console.log(error);
 });
 Object.keys(params5).forEach(function(key){url += "&" + key + "=" + params5[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="weibo-list-item"><div class="weibo-hotness ' + hotness[('周报速览')] + '">' + ('周报速览') + '</div>' + '<span class="weibo-title"><a title="' + response.query.search[1].title + '"href="' + targetUrl + response.query.search[1].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[1].title + '</a></span>' + '</div>'
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('周报速览')] + '">' + ('周报速览') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[1].title + '"href="' + targetUrl + response.query.search[1].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[1].title + '</a></span>' + '</div>'
     html += '</div>'
-    document.getElementById('weibo-container').innerHTML = html
+    document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
     console.log(error);
 });

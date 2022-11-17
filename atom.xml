@@ -6,7 +6,7 @@
   <link href="https://blog.higuchi.xyz/atom.xml" rel="self"/>
   
   <link href="https://blog.higuchi.xyz/"/>
-  <updated>2022-06-09T14:02:31.638Z</updated>
+  <updated>2022-11-17T18:04:44.011Z</updated>
   <id>https://blog.higuchi.xyz/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用三种卷积核算子进行图片边缘检测</title>
+    <link href="https://blog.higuchi.xyz/2022/11/18/2022-11-18/"/>
+    <id>https://blog.higuchi.xyz/2022/11/18/2022-11-18/</id>
+    <published>2022-11-17T17:16:49.000Z</published>
+    <updated>2022-11-17T18:04:44.011Z</updated>
+    
+    
+    <summary type="html">cover:twitter@BTR_anime</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="OpenCV" scheme="https://blog.higuchi.xyz/tags/OpenCV/"/>
+    
+    <category term="数字图像处理" scheme="https://blog.higuchi.xyz/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在64位树莓派上部署OpenCV</title>
+    <link href="https://blog.higuchi.xyz/2022/10/01/2022-10-1/"/>
+    <id>https://blog.higuchi.xyz/2022/10/01/2022-10-1/</id>
+    <published>2022-10-01T09:36:35.000Z</published>
+    <updated>2022-11-17T16:36:57.900Z</updated>
+    
+    
+    <summary type="html">真的没有鸽</summary>
+    
+    
+    
+    
+    <category term="嵌入式" scheme="https://blog.higuchi.xyz/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    <category term="Linux" scheme="https://blog.higuchi.xyz/tags/Linux/"/>
+    
+    <category term="树莓派" scheme="https://blog.higuchi.xyz/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
+    
+    <category term="OpenCV" scheme="https://blog.higuchi.xyz/tags/OpenCV/"/>
+    
+  </entry>
   
   <entry>
     <title>初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</title>
