@@ -95,7 +95,12 @@ fetch(url).then(response=>response.json()).then(response=>{
 //
 Object.keys(params3).forEach(function(key){url += "&" + key + "=" + params3[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('当前活动')] + '">' + ('当前活动') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[0].title + '"href="' + targetUrl + response.query.search[0].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[0].title + '</a></span>' + '</div>'
+    for(var data in response.query.search){
+        if(response.query.search[data].title.indexOf("活动")!=-1){
+            break;
+        }
+    }
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('当前活动')] + '">' + ('当前活动') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
     document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
@@ -103,7 +108,12 @@ fetch(url).then(response=>response.json()).then(response=>{
 });
 Object.keys(params5).forEach(function(key){url += "&" + key + "=" + params5[key];});
 fetch(url).then(response=>response.json()).then(response=>{
-    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('周报速览')] + '">' + ('周报速览') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[1].title + '"href="' + targetUrl + response.query.search[1].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[1].title + '</a></span>' + '</div>'
+    for(var data in response.query.search){
+        if(response.query.search[data].title.indexOf("繁中")==-1 && data != 0){
+            break;
+        }
+    }
+    html += '<div class="umamusume-list-item"><div class="umamusume-hotness ' + hotness[('周报速览')] + '">' + ('周报速览') + '</div>' + '<span class="umamusume-title"><a title="' + response.query.search[data].title + '"href="' + targetUrl + response.query.search[data].title + '" target="_blank" rel="external nofollow noreferrer">' + response.query.search[data].title + '</a></span>' + '</div>'
     html += '</div>'
     document.getElementById('uma-container').innerHTML = html
 }).catch(function(error) {
