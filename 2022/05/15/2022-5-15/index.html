@@ -1,0 +1,575 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>初探Unity(1)-MMD模型导入与简单人形动画与动画状态机 | RyujoPad's Blog</title><meta name="keywords" content="Unity,C#,MMD"><meta name="author" content="ryujopad"><meta name="copyright" content="ryujopad"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="起因是国美全栈高材生的一次奇葩需求。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机">
+<meta property="og:url" content="https://blog.higuchi.xyz/2022/05/15/2022-5-15/index.html">
+<meta property="og:site_name" content="RyujoPad&#39;s Blog">
+<meta property="og:description" content="起因是国美全栈高材生的一次奇葩需求。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.higuchi.xyz/img/Avator.jpg">
+<meta property="article:published_time" content="2022-05-15T14:02:30.000Z">
+<meta property="article:modified_time" content="2022-06-09T14:02:31.638Z">
+<meta property="article:author" content="ryujopad">
+<meta property="article:tag" content="Unity">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="MMD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.higuchi.xyz/img/Avator.jpg"><link rel="shortcut icon" href="/img/chigusa3.png"><link rel="canonical" href="https://blog.higuchi.xyz/2022/05/15/2022-5-15/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-06-09 22:02:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/umamusume.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="RyujoPad's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/unnamed.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/Avator.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RyujoPad's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-15T14:02:30.000Z" title="发表于 2022-05-15 22:02:30">2022-05-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-06-09T14:02:31.638Z" title="更新于 2022-06-09 22:02:31">2022-06-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><em>＂真正的不幸是利己主义。＂</em></strong></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>　　也许是国美高材生肏了大半学期的呸，导致直到要结课前两星期才来找到我和牛哥提出了这次的奇葩需求。能用树莓派来做IoT（显然第一个是大写的I而非小写的l，这是相当重要的注意事项，也许你就会因为一次错误的读音而被认识的技术巨牛打一辈子黑枪。试想若干年之后你的每一份简历上都会被开核技术高超的技术大牛烙上il不分的标签，就令人不寒而栗）不禁令人感叹双一流的雄厚科研实力，而在IoT之中再缝入unity3D,更让人对任课老师强化使命担当，勇于创新突破的伟大精神感到敬佩。很难想象在如此全面一流教育中诞生的全栈高材生会是一个正大光明画着南桐雅作的耽美画手，过于先锋与前卫的艺术创想实属是目前迂腐陈旧的我无法品鉴的。但被这样一位虽素未谋面的专业课老师大脑升级到不能自己的我，还是答应这一份奇葩的需求（大部分原因只是牛神踢皮球，桀桀，我的球技太烂辣）。当然在熬夜学习unity，终于完成需求后又被高材生告知<strong>做错了捏</strong>，都是后话了。一想到我初中许多被某人借走就了无音讯的文具，中考毕业由于某个霓虹人因为忘记回家还要办签证而泡汤的日本之旅，以及已经半年没看见的我的wacom笔盒，这也就不足为奇了。<br>　　牛神踢出了皮球，夫哥白兰了课设，我学会了用unity搞二刺猿模型，可能唯一失去的只有我电脑d盘里的50个g罢了。</p>
+<h1 id="MMD模型与unity"><a href="#MMD模型与unity" class="headerlink" title="MMD模型与unity"></a>MMD模型与unity</h1><p>　　做unity时，没有现成大碗好用的人物模型是其中一大痛点，但MMD有很多免费配布的精致二刺猿模型，拿来练练手不失为一项选择。虽然mikumikudance使用pmx,pmd格式的模型文件，而unity3D基本使用fbx格式，但由两种格式都是多边形建模，可以将两者的模型文件进行转换。</p>
+<h2 id="pmx格式fbx格式模型之简单研究"><a href="#pmx格式fbx格式模型之简单研究" class="headerlink" title="pmx格式fbx格式模型之简单研究"></a>pmx格式fbx格式模型之简单研究</h2><p>　　遗憾的是密窟密窟当思的日文文档我完全看不懂，只能去研究洋人的翻成英文的<a target="_blank" rel="noopener" href="https://gist.github.com/felixjones/f8a06bd48f9da9a4539f">版本</a>。可惜我不是CET6 580的上海国奖哥，也不是600的国际公民牛神，只能用我贫瘠的英语知识读个糊涂。而fbx的数据格式一目了然，不可谓能从中窥见连个纸牌对对碰的页游都做不明白的日本程序员有多么拉。</p>
+<h3 id="FBX"><a href="#FBX" class="headerlink" title="FBX"></a>FBX</h3><p>　　让我们看一段fbx<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">FBXHeaderExtension:  &#123;</span><br><span class="line">	FBXHeaderVersion: 1003</span><br><span class="line">	FBXVersion: 7500</span><br><span class="line">	CreationTimeStamp:  &#123; </span><br><span class="line">		Version: 1000</span><br><span class="line">		Year: 2022</span><br><span class="line">		Month: 5</span><br><span class="line">		Day: 14</span><br><span class="line">		Hour: 22</span><br><span class="line">		Minute: 4</span><br><span class="line">		Second: 22</span><br><span class="line">		Millisecond: 796</span><br><span class="line">	&#125;</span><br><span class="line">	Creator: &quot;FBX SDK/FBX Plugins version 2016.1&quot;</span><br><span class="line">	SceneInfo: &quot;SceneInfo::GlobalInfo&quot;, &quot;UserData&quot; &#123;</span><br><span class="line">		Type: &quot;UserData&quot;</span><br><span class="line">		Version: 100</span><br><span class="line">		MetaData:  &#123;</span><br><span class="line">			Version: 100</span><br><span class="line">			Title: &quot;PMX2FBX Mesh for Unity&quot;</span><br><span class="line">			Subject: &quot;PMX2FBX Mesh for Unity&quot;</span><br><span class="line">			Author: &quot;PMX2FBX Development build.&quot;</span><br><span class="line">			Keywords: &quot;PMX2FBX&quot;</span><br><span class="line">			Revision: &quot;0.0.0&quot;</span><br><span class="line">			Comment: &quot;No comments.&quot;</span><br><span class="line">		&#125;</span><br><span class="line">		Properties70:  &#123;</span><br><span class="line">			P: &quot;DocumentUrl&quot;, &quot;KString&quot;, &quot;Url&quot;, &quot;&quot;, &quot;D:\Users\Ryujo_PAD\unity\test1\Assets\帕朵菲莉丝\帕朵菲莉丝.fbx&quot;</span><br><span class="line">			P: &quot;SrcDocumentUrl&quot;, &quot;KString&quot;, &quot;Url&quot;, &quot;&quot;, &quot;D:\Users\Ryujo_PAD\unity\test1\Assets\帕朵菲莉丝\帕朵菲莉丝.fbx&quot;</span><br><span class="line">			P: &quot;Original&quot;, &quot;Compound&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;Original|ApplicationVendor&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;Original|ApplicationName&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;Original|ApplicationVersion&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;Original|DateTime_GMT&quot;, &quot;DateTime&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;Original|FileName&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;LastSaved&quot;, &quot;Compound&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;LastSaved|ApplicationVendor&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;LastSaved|ApplicationName&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;LastSaved|ApplicationVersion&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">			P: &quot;LastSaved|DateTime_GMT&quot;, &quot;DateTime&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">GlobalSettings:  &#123;</span><br><span class="line">	Version: 1000</span><br><span class="line">	Properties70:  &#123;</span><br><span class="line">		P: &quot;UpAxis&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;UpAxisSign&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;FrontAxis&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,2</span><br><span class="line">		P: &quot;FrontAxisSign&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;CoordAxis&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,0</span><br><span class="line">		P: &quot;CoordAxisSign&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;OriginalUpAxis&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,-1</span><br><span class="line">		P: &quot;OriginalUpAxisSign&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;UnitScaleFactor&quot;, &quot;double&quot;, &quot;Number&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;OriginalUnitScaleFactor&quot;, &quot;double&quot;, &quot;Number&quot;, &quot;&quot;,1</span><br><span class="line">		P: &quot;AmbientColor&quot;, &quot;ColorRGB&quot;, &quot;Color&quot;, &quot;&quot;,0,0,0</span><br><span class="line">		P: &quot;DefaultCamera&quot;, &quot;KString&quot;, &quot;&quot;, &quot;&quot;, &quot;Producer Perspective&quot;</span><br><span class="line">		P: &quot;TimeMode&quot;, &quot;enum&quot;, &quot;&quot;, &quot;&quot;,0</span><br><span class="line">		P: &quot;TimeProtocol&quot;, &quot;enum&quot;, &quot;&quot;, &quot;&quot;,2</span><br><span class="line">		P: &quot;SnapOnFrameMode&quot;, &quot;enum&quot;, &quot;&quot;, &quot;&quot;,0</span><br><span class="line">		P: &quot;TimeSpanStart&quot;, &quot;KTime&quot;, &quot;Time&quot;, &quot;&quot;,0</span><br><span class="line">		P: &quot;TimeSpanStop&quot;, &quot;KTime&quot;, &quot;Time&quot;, &quot;&quot;,46186158000</span><br><span class="line">		P: &quot;CustomFrameRate&quot;, &quot;double&quot;, &quot;Number&quot;, &quot;&quot;,-1</span><br><span class="line">		P: &quot;TimeMarker&quot;, &quot;Compound&quot;, &quot;&quot;, &quot;&quot;</span><br><span class="line">		P: &quot;CurrentTimeMarker&quot;, &quot;int&quot;, &quot;Integer&quot;, &quot;&quot;,-1</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>由于完全没有建模的经验，所以我就瞎几把纯臆想来分析。FBX文件是node节点格式的文件，本质上是多组嵌套的节点列表，而fbx文件节点中的元素就是对模型几何数据的包装。FBX文件中的属性是用来添加数据的方法，属性由每个节点中的<code>Properties70</code>元素中的子元素表示。<br>　　上列名叫帕朵菲莉丝的模型数据中存在两个父节点<code>FBXHeaderExtension</code>和<code>GlobalSettings</code>。其中GlobalSettings用于存储模型的全局设置信息，观察Properties70中的元素，辟如<code>UpAxis</code>的值为1，则表示规定Y轴向上，<code>OriginalUnitScaleFactor</code>值为1表示模型中1单位为1米。<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Objects:  &#123;</span><br><span class="line">	Geometry: 83465080, &quot;Geometry::U_CharMesh_0&quot;, &quot;Mesh&quot; &#123;</span><br><span class="line">		Vertices: *66465 &#123;···&#125;</span><br><span class="line">		···</span><br><span class="line">		&#125;</span><br><span class="line">	···</span><br><span class="line">	Model: 83438896, &quot;Model::U_Char&quot;, &quot;Null&quot; &#123;</span><br><span class="line">		Version: 232</span><br><span class="line">		Properties70:  &#123;</span><br><span class="line">			P: &quot;ScalingMax&quot;, &quot;Vector3D&quot;, &quot;Vector&quot;, &quot;&quot;,0,0,0</span><br><span class="line">		&#125;</span><br><span class="line">		Shading: Y</span><br><span class="line">		Culling: &quot;CullingOff&quot;</span><br><span class="line">	&#125;</span><br><span class="line">	···</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>如上对对象的定义是fbx文件中最重要的部分，因为如材质，几何顶点，法线，UV坐标信息等模型最重要的内容都存储在了objects节点之中。对于父节点下的子对象，这个叫帕朵菲莉丝的模型中的对象有如下几种</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>对象名</th>
+<th>存储数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Geometry</td>
+<td>顶点、法线、UV···</td>
+</tr>
+<tr>
+<td>Model</td>
+<td>模型的平移，旋转，镜像等信息</td>
+</tr>
+<tr>
+<td>Material</td>
+<td>模型的材质对象</td>
+</tr>
+<tr>
+<td>Deformer</td>
+<td>变形器，通常包含蒙皮、骨骼等</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="PMX"><a href="#PMX" class="headerlink" title="PMX"></a>PMX</h3><p>　　相似的pmx与fbx的数据格式基本一致，只是我用文本编辑器死活打不开.pmx文件，只能引用国外二刺猿翻译成英文的文档罢。<br>　　对应FBX的对象，PMX在全局中定义了模型的引索类型，如</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vertex</td>
+<td>顶点</td>
+</tr>
+<tr>
+<td>Bone</td>
+<td>骨骼</td>
+</tr>
+<tr>
+<td>Material</td>
+<td>材质</td>
+</tr>
+<tr>
+<td>Texture</td>
+<td>纹理</td>
+</tr>
+<tr>
+<td>Morph</td>
+<td>变形</td>
+</tr>
+<tr>
+<td>Rigidbody</td>
+<td>刚体</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>不难发现由于密窟密窟当思面向<del>二刺猿</del>人形动画的多边形建模方式，PMX的引索类型更加细化，特别是面向骨骼与变形方面,强化了对IK骨骼的表现。但其中不乏有诸如<code>表示枠</code>这样令人倍感困惑的词语。如果从日语上理解，这三个汉字基本都与中文同义，<code>表示</code>[ヒョジ]即是展示，<code>枠</code>[わく]则是框架，但合在一起的展示框架到底什么东西。如果从英语上，日本人给出了一个更让人疑惑的<code>display frame</code>，展示帧。但拥有丰富黄油素养的我（指I社游戏与3D妹抖）一下就明白了，表示枠不就是3D黄油里那些形体模型以外的物品<del>插件</del>吗。二刺猿人物特别喜欢在衣服上搭载精致的小装饰，把自己裹得跟个圣诞树一样，突出一个精致感。<br>　　然而FBX有自己的的SDK，令人感慨。</p>
+<h1 id="MMD模型导入"><a href="#MMD模型导入" class="headerlink" title="MMD模型导入"></a>MMD模型导入</h1><p>　　使用<a target="_blank" rel="noopener" href="http://stereoarts.jp/">MMD4Mecanim</a>这个插件能十分方便的把密窟密窟当思的模型导入到unity中<del>不排除导入过程中可能会出现的材质丢失</del>。<br><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">int</span> FullBodyIKTransformElements = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="built_in">int</span> FullBodyIKTargetMax = <span class="number">36</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> AnimData <span class="title">BuildAnimData</span>(<span class="params">TextAsset animFile</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExtraData <span class="title">BuildExtraData</span>(<span class="params">TextAsset extraFile</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ModelData <span class="title">BuildModelData</span>(<span class="params">TextAsset modelFile</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FullBodyIKGroup <span class="title">GetFullBodyIKGroup</span>(<span class="params"><span class="built_in">int</span> fullBodyIKTargetIndex</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> FullBodyIKGroup <span class="title">GetFullBodyIKGroup</span>(<span class="params"><span class="keyword">ref</span> <span class="built_in">int</span> fullBodyIKTargetIndex</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">GetFullBodyIKTargetName</span>(<span class="params"><span class="built_in">int</span> fullBodyIKTargetIndex</span>)</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">string</span> <span class="title">GetFullBodyIKTargetName</span>(<span class="params"><span class="keyword">out</span> FullBodyIKGroup fullBodyIKGroup, <span class="built_in">int</span> fullBodyIKTargetIndex</span>)</span>;</span><br></pre></td></tr></table></figure><br>观察一下插件的脚本中的MMD4MecanimData类，不出所料一大半都是对密窟密窟当思模型文件中IK骨骼以及约束的重新定向。可惜没有文档，日本人只写了使用指南。<br>插件特性：</p>
+<ul>
+<li>将PMX/PMD+VMD转成FBX，转成Unity可以导入的格式</li>
+<li>骨骼调整以适应 Mecanim（unity的动画系统）</li>
+<li>用 Bullet Physics 再现头发和裙子的行为（烘焙成运动）</li>
+<li>材质和着色器初始设置</li>
+<li>面部表情变形修正脚本</li>
+<li>插件版 Bullet Physics 实时再现物理行为</li>
+<li>AnimationType：初始化为 Generic 或 Humanoid</li>
+</ul>
+<p>好像也可以导入密窟密窟当思的动作文件？但指南后面又写了<em>Humanoid モーションはできません。（変換時に一緒に変換した VMD のみ再生可能）</em> 人形动画不可能，只能够播放一起转换的VMD文件。是说不能使用unity的人形动画吗，但在我后来的尝试中在unity里重新给模型绑上骨骼一样能使用人形动画，我暂且蒙古。<br><img src="/img/jiale.png" alt="珈乐"> 转换后就能成功导入。</p>
+<h1 id="人形动画与动画状态机控制"><a href="#人形动画与动画状态机控制" class="headerlink" title="人形动画与动画状态机控制"></a>人形动画与动画状态机控制</h1><p>　　在模型导入设置的Rig中将动画类型改为人形动画，进入骨骼调整，就能为模型绑定动画了。但令人疑惑的是我最初使用珈乐的模型绑定动画，脚踝与小腿处的骨骼都是扭曲的。模型附带的使用说明也写了“该模型人物是真实身高比例，在MMD中载入动作文件后，为避免出现动作幅度过大的问题需要重新调整骨骼帧”。笑死完全不会，我还是用点正常的模型罢。<br>　　unity中播放动画需要动画状态机的控制，正如数电中的有限状态机，通过外界条件改变就能触发状态机向次态改变，从而使unity中的游戏人物能完成各式的操作。<br><img src="/img/animecontr.png" alt="动画状态机"><br>为这一状态机添加三个动画状态，再从网上扒三个动画绑定在上面。众所周知数电中状态机一定有初态，一般来说终态与不安全状态最后都会回到初态。unity中的状态机自带<code>Exit</code> <code>Entry</code> <code>Any State</code>三个状态，进入exit后对象将不能进入任何状态，常用于角色死亡时。entry则表示对象进入状态机后的初态，任何非exit状态结束后都会进入entry后的第一个状态。any state后的则表示任何时候都能触发的状态。通过改变设定的条件值就能完成从一个状态到另一个状态的跳变，当然在游戏中我们可以通过绑定在UI或是人体输入设备上的脚本实现交互地切换操控人物的动作。<br>比如说上面提到过的动画状态机的脚本<br><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AnimeController2</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Start is called before the first frame update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Stop</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.gameObject.GetComponent&lt;Animator&gt;().SetBool(<span class="string">&quot;kick1&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.gameObject.GetComponent&lt;Animator&gt;().SetBool(<span class="string">&quot;kick2&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoKick1</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.gameObject.GetComponent&lt;Animator&gt;().SetTrigger(<span class="string">&quot;kick1_t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DoKick2</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.gameObject.GetComponent&lt;Animator&gt;().SetTrigger(<span class="string">&quot;kick2_t&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="built_in">string</span> <span class="title">getCurrentClipInfo</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        AnimatorClipInfo[] m_CurrentClipInfo = <span class="keyword">this</span>.gameObject.GetComponent&lt;Animator&gt;().GetCurrentAnimatorClipInfo(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> m_CurrentClipInfo[<span class="number">0</span>].clip.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>脚本要做的无非就是改变所设定条件的值来使状态机切换当前动画，这个值可以是布尔型，数值型，文本甚至一个单一的标志符，非常简单。<br>将此动画状态机绑定在人物模型上，再将脚本绑定在按钮上就能简易地使用。看一段使用YYB式初音模型的实际效果<br><img src="/img/mikutest.gif" alt="初音踢"><br>头发的物理效果来自MMDM插件生成，只能说如果物理配件过多会导致物理效果失效并使你的二刺猿人物模型像插了电动棒一样抽搐。只想用插件不想使用Blender重新为模型加物理的懒狗建议使用物理布料较少的模型（意味深）。如果在脚本控制中同时改变模型的xy轴距离就能实现人物在平面上的行走。</p>
+<p><em>仍在施工···</em></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ryujopad</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.higuchi.xyz/2022/05/15/2022-5-15/">https://blog.higuchi.xyz/2022/05/15/2022-5-15/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.higuchi.xyz" target="_blank">RyujoPad's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Unity/">Unity</a><a class="post-meta__tags" href="/tags/C/">C#</a><a class="post-meta__tags" href="/tags/MMD/">MMD</a></div><div class="post_share"><div class="social-share" data-image="/img/Avator.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/10/01/2022-10-1/"><img class="prev-cover" src="/img/Ardan.jfif" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">在64位树莓派上部署OpenCV</div></div></a></div><div class="next-post pull-right"><a href="/2022/04/17/2022-4-17/"><img class="next-cover" src="/img/rudolf.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/unnamed.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ryujopad</div><div class="author-info__description">EE新生，前后端苦手</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/quantum818"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quantum818" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:R8.314@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">前途是光明的，道路是曲折的</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MMD%E6%A8%A1%E5%9E%8B%E4%B8%8Eunity"><span class="toc-number">2.</span> <span class="toc-text">MMD模型与unity</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#pmx%E6%A0%BC%E5%BC%8Ffbx%E6%A0%BC%E5%BC%8F%E6%A8%A1%E5%9E%8B%E4%B9%8B%E7%AE%80%E5%8D%95%E7%A0%94%E7%A9%B6"><span class="toc-number">2.1.</span> <span class="toc-text">pmx格式fbx格式模型之简单研究</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FBX"><span class="toc-number">2.1.1.</span> <span class="toc-text">FBX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PMX"><span class="toc-number">2.1.2.</span> <span class="toc-text">PMX</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MMD%E6%A8%A1%E5%9E%8B%E5%AF%BC%E5%85%A5"><span class="toc-number">3.</span> <span class="toc-text">MMD模型导入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%BA%E5%BD%A2%E5%8A%A8%E7%94%BB%E4%B8%8E%E5%8A%A8%E7%94%BB%E7%8A%B6%E6%80%81%E6%9C%BA%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">人形动画与动画状态机控制</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云"><img src="/img/SICKHACK.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="鉴证的逻辑(1)——极权国家、全民党与乌云"/></a><div class="content"><a class="title" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云">鉴证的逻辑(1)——极权国家、全民党与乌云</a><time datetime="2023-04-05T08:27:56.000Z" title="发表于 2023-04-05 16:27:56">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测"><img src="/img/bocchi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用三种卷积核算子进行图片边缘检测"/></a><div class="content"><a class="title" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测">利用三种卷积核算子进行图片边缘检测</a><time datetime="2022-11-17T17:16:49.000Z" title="发表于 2022-11-18 01:16:49">2022-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV"><img src="/img/Ardan.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在64位树莓派上部署OpenCV"/></a><div class="content"><a class="title" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV">在64位树莓派上部署OpenCV</a><time datetime="2022-10-01T09:36:35.000Z" title="发表于 2022-10-01 17:36:35">2022-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"><img src="/img/Avator.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"/></a><div class="content"><a class="title" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机">初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</a><time datetime="2022-05-15T14:02:30.000Z" title="发表于 2022-05-15 22:02:30">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"><img src="/img/rudolf.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"/></a><div class="content"><a class="title" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆">明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</a><time datetime="2022-04-16T18:07:10.000Z" title="发表于 2022-04-17 02:07:10">2022-04-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By ryujopad</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'fraXQvUf8J0MiqNFrpC44hJ8-gzGzoHsz',
+      appKey: 'P99TjRU8Y9Sn4OGj3JbGstsC',
+      placeholder: '欢迎大家来评论，摩多摩多~',
+      avatar: 'mp',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/umamusume.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><style>.uma_parent {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 6px rgb(7 17 27 / 6%);
+  margin: 10px;
+  padding: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.uma_parent:hover {
+  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
+}
+
+#uma-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.umamusume-newUma {
+  background: #ff3852
+}
+
+.umamusume-twitter {
+  background: #ff9406
+}
+
+.umamusume-supportCard {
+  background: #00b7ee
+}
+
+.umamusume-notice {
+  background: #ff6f49
+}
+
+.umamusume-notice-ad {
+  background: #332B33
+}
+
+.umamusume-activity {
+  background: #f86400
+}
+
+.umamusume-list-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.umamusume-title {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.umamusume-hotness {
+  margin: 3px 5px;
+  padding: 1px 4px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+}</style><script>let html = '<div class="uma-list">';
+
+let uma_parent = document.createElement("div");
+uma_parent.classList.add("uma_parent");
+
+let uma_container = document.createElement("div");
+uma_container.setAttribute("id", "uma-container");
+
+let hotness = {
+  日服公告: "umamusume-notice-ad",
+  周报速览: "umamusume-twitter",
+  当前活动: "umamusume-activity",
+  马娘卡池: "umamusume-newUma",
+  支援卡池: "umamusume-supportCard",
+};
+var url = "https://wiki.biligame.com/umamusume/api.php";
+var targetUrl = "https://wiki.biligame.com/umamusume/";
+var params1 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "公告",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params2 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "赛马娘卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params3 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "剧情活动",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params4 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "支援卡卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params5 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "竞技场周报",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+url = url + "?origin=*";
+//
+Object.keys(params1).forEach(function (key) {
+  url += "&" + key + "=" + params1[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["日服公告"] +
+      '">' +
+      "日服公告" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[0].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[0].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[0].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params2).forEach(function (key) {
+  url += "&" + key + "=" + params2[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["马娘卡池"] +
+      '">' +
+      "马娘卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params4).forEach(function (key) {
+  url += "&" + key + "=" + params4[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["支援卡池"] +
+      '">' +
+      "支援卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params3).forEach(function (key) {
+  url += "&" + key + "=" + params3[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("活动")!=-1){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["当前活动"] +
+      '">' +
+      "当前活动" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+Object.keys(params5).forEach(function (key) {
+  url += "&" + key + "=" + params5[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("繁中")==-1 && data != 0){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["周报速览"] +
+      '">' +
+      "周报速览" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+const jx_div = document.createElement("div");
+jx_div.innerHTML = `<i class="fas fa-horse-head"> UMA特雷森校历 </i>`;
+jx_div.classList.add("jx");
+uma_parent.appendChild(jx_div);
+uma_parent.appendChild(uma_container);
+
+const card = document.getElementsByTagName("uma-card")[0];
+card.parentNode.replaceChild(uma_parent, card);
+</script><!-- hexo injector body_end end --></body></html>

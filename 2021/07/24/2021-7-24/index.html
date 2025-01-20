@@ -1,0 +1,585 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>初探电子电路(1)-分离元件放大电路分析方法 | RyujoPad's Blog</title><meta name="keywords" content="学习,模电,电子,放大电路"><meta name="author" content="ryujopad"><meta name="copyright" content="ryujopad"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="pixiv:61996056">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探电子电路(1)-分离元件放大电路分析方法">
+<meta property="og:url" content="https://blog.higuchi.xyz/2021/07/24/2021-7-24/index.html">
+<meta property="og:site_name" content="RyujoPad&#39;s Blog">
+<meta property="og:description" content="pixiv:61996056">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.higuchi.xyz/img/SW2.jpg">
+<meta property="article:published_time" content="2021-07-24T13:14:24.000Z">
+<meta property="article:modified_time" content="2021-08-01T17:13:33.635Z">
+<meta property="article:author" content="ryujopad">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="模电">
+<meta property="article:tag" content="电子">
+<meta property="article:tag" content="放大电路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.higuchi.xyz/img/SW2.jpg"><link rel="shortcut icon" href="/img/chigusa3.png"><link rel="canonical" href="https://blog.higuchi.xyz/2021/07/24/2021-7-24/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-02 01:13:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/umamusume.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="RyujoPad's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/unnamed.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/SW2.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RyujoPad's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">初探电子电路(1)-分离元件放大电路分析方法</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-24T13:14:24.000Z" title="发表于 2021-07-24 21:14:24">2021-07-24</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-01T17:13:33.635Z" title="更新于 2021-08-02 01:13:33">2021-08-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><em>＂Where is, repeat, where is Task Force Thirty Four? The world wonders.＂</em></strong></p>
+<p><script type="text/javascript">
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('code').forEach(code => {
+    const text = code.innerHTML;
+    is_inline_math = /^\$(.*)\$$/.exec(text);
+    is_display_math = /^\$\$(.*)\$\$$/ms.exec(text) || /^\\begin\{.+\}(.*)\\end\{.+\}/ms.exec(text);
+    if (is_inline_math || is_display_math) {
+      code.parentElement.classList.add('has-jax');
+      if (is_inline_math) {
+        code.outerHTML = "<span class=yuuki_mathjax_inline>" + text + "</span>";
+      } else {
+        code.outerHTML = "<span class=yuuki_mathjax_display>" + text + "</span>";
+      }
+    }
+  });
+});
+</script></p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>　　有的卷王不止每天写前后端，甚至还开始学硬件了。我不说他是谁，但大家都明白我说的是谁。但现在回想起自己博客里竟然没有一篇硬件相关的文章，实在有亏于自己的专业，在卷王的提议下就来回忆一下大一学的电路知识，顺便催促一下卷王更新年中。</p>
+<h1 id="基础电路分析方法"><a href="#基础电路分析方法" class="headerlink" title="基础电路分析方法"></a>基础电路分析方法</h1><p>电路特性基于基尔霍夫定律，相信牛卷王肯定已经烂熟于心了。</p>
+<h2 id="网孔分析法"><a href="#网孔分析法" class="headerlink" title="网孔分析法"></a>网孔分析法</h2><p>支路：将每个串联元件看做一条支路<br>回路：将每个闭合支路看做一个回路<br>网孔：网孔一定是回路，回路不一定是网孔<br>将复杂电路中的每一个闭合回路看作是一个网孔<br><img src="/img/wk1.jpg" alt="wk1"><br>已知电路中存在三个闭合支路，两个网孔，高数61的农林高材生都知道闭合回路电流处处相等，由此可知电路中存在网孔电流<code>I1</code> <code>I2</code>以及合成电流<code>I3</code><br>到这里我们就能通过高中电路知识轻松的列出电路相关参数的关系，规定网孔电流皆为顺时针，合成电流<code>I3</code>方向由上至下得</p>
+<script type="math/tex; mode=display">\begin{cases}
+I_1-I_2=I_3\\
+(R_1+R_2+R_3)I_1+R_3I_3-I_2R3=U_1\\
+(R_3+R_4)I_2-R_3I_3-I_1R3=-U_2\\
+\end{cases}</script><p>$R_3$ 所在支路为网孔一与网孔二重合部分因此分析时规定此处有<code>I1</code> <code>I2</code> <code>I3</code>，同向电流相加，反向电流相减。<br>网孔分析的一般方法:</p>
+<script type="math/tex; mode=display">\begin{cases}
+(R_1+R_2+R_3)I_1-I_2R3=U_1\\
+(R_3+R_4)I_2-I_1R3=-U_2\\
+\end{cases}</script><p>使用一般方法分析时不考虑合成电流，单独分析每一个网孔如网孔一自电阻为$R_1+R_3+R_2$，网孔一与网孔二互电阻为$R_3$，每一网孔中自电阻相加，互电阻相减</p>
+<h2 id="叠加法"><a href="#叠加法" class="headerlink" title="叠加法"></a>叠加法</h2><p>根据电路中电源种类的不同，可以采用不同的电路分析方法。辟如电压源就用网孔法，电流源就用节点法<del>二者皆有时可以用含独立源的方法分析</del>。但我们在实际分析时往往不会采用以上的方法，而是根据<strong>叠加原理</strong>将普通电路转化成<strong>戴维南等效电路</strong>或是<strong>诺顿等效电路</strong>。由于笔者实力相当有限，所以仅举例戴维南等效的情况。<br>对上图$R_4$分析，画出对应的戴维南等效电路<br><img src="/img/dw1.jpg" alt="戴维南1"><br>使用叠加原理时要对每一个独立源分别分析，此时另外电压源看做短路，电流源看做断路。将电路其余阻抗合成，将复杂电路转化为一个二端网络，$R_4$ 就为电路负载。</p>
+<script type="math/tex; mode=display">\begin{cases}
+\frac{U_1}{R_1+R_2+R_3 || R_4}\cdot\frac{R_3}{R_3+R_4}=I_1\\
+\frac{U_2}{(R_1+R_2) || R_3+R_4}=I_2\\
+I_T=I_1+I_2\\
+\end{cases}</script><p>分析复杂电路时肯定不能用初高中的方法来列式计算，一个稍复杂的运算电路可能就有几十个网络。这里所列数的分析方法是较为基础的，完全基于笔者大一上学期所学知识的残留，可能有论述不到位的地方。当然实际的电路构成与分析肯定要比我所举的例子复杂得多，包括但不限于交直流电路，LCR谐振电路等等。关于电源与强电的部分，电信也是不涉及的，若是想要完整系统学习电路分析的技巧可以去看<a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?spm=a230r.1.14.19.567e2235dTkwFz&amp;id=42569241534&amp;ns=1&amp;abbucket=10">《电路分析导论》</a>这本书。</p>
+<h1 id="基本CE放大电路分析"><a href="#基本CE放大电路分析" class="headerlink" title="基本CE放大电路分析"></a>基本CE放大电路分析</h1><p>众所周知放大电路一共有三种组态，分别是CE，CC和CB（共射，共集，共基）。CE放大电路作为可以同时放大电流与电压信号的放大电路，常被用做差放电路与多级功放的放大级和反相器。为什么这里会单单举例CE这一个组态呢，很显然是笔者模电期末的一般放大电路计算题只考了CE组态的放大电路。当然如果你问我为什么放大电路能放大信号，我只会说这个问题和49哥为什么考49，牛哥为什么玩咖喱一样愚蠢而复杂。这个问题如果再深入下去就会变成三极管中电子与空穴的漂移运动，扩散运动等等，又或是不同掺杂下的半导体在热电效应下的内部粒子运动。这个问题过于微观与超纲，属于是材料研究的范畴。</p>
+<p>这是<strong>清华电子系模电教材（童诗白）</strong>给出的阻容耦合式共射极放大电路的例图，具体在哪一页爷忘了。<br> <img src="/img/btj1.jpg" alt="放大电路"></p>
+<h2 id="直流分析"><a href="#直流分析" class="headerlink" title="直流分析"></a>直流分析</h2><p>相信每个高中选修物理的人都知道电容具有“通交流，阻直流”的特性，由此对此放大电路进行直流分析时将每一处电容处看做断路，画出直流通路，并计算出放大电路各静态参数（直流量）。<br><img src="/img/dc1.jpg" alt="直流回路1"></p>
+<h3 id="静态工作点Q"><a href="#静态工作点Q" class="headerlink" title="静态工作点Q"></a>静态工作点Q</h3><p>静态工作点是指三极管放大电路中，电路交流输入信号为零时，处于直流工作状态。此时三极管发射结正向偏置，集电结反向偏置。<br>已知三极管直流放大倍数为 $\beta$ 如下列式</p>
+<script type="math/tex; mode=display">U_{BQ}=V_{CC}\cdot\frac{R_{b2}}{R_{b1}+R_{b2}}</script><script type="math/tex; mode=display">I_{EQ} \approx I_{CQ}=\frac{U_{EQ}}{R_e}=\frac{U_{BQ}-U_{BEQ}}{R_e}</script><script type="math/tex; mode=display">I_{BQ} \approx \frac{I_{CQ}}{\beta}</script><script type="math/tex; mode=display">U_{CEQ}=V_{CC}-I_{CQ}\cdot(R_c+R_e)</script><h2 id="交流分析"><a href="#交流分析" class="headerlink" title="交流分析"></a>交流分析</h2><p>三极管放大电路最经常被用来放大交流信号，所以一个放大电路的动态参数是其性能指标最直接也是最重要的参考标准。我们能将处在交流回路之中的三极管等效替换成一个串联模型，以便我们分析它的电路信号。对于普通晶体管（TTL管）我们可以将它看做是一个电阻与受控源的串联，我们称这个模型为<strong>电流控制电流源（CCCS）</strong>模型。而场效应管（CMOS管）的模型则是<strong>电压控制电流源（VCCS）</strong>模型。即使是CMOS管已经大规模应用的今天，大部分教材的放大电路依旧是以晶体管为分析对象，当然二者之间也没什么差别。</p>
+<h3 id="CCCS等效模型"><a href="#CCCS等效模型" class="headerlink" title="CCCS等效模型"></a>CCCS等效模型</h3><p><img src="/img/modl1.jpg" alt="交流模型"><br>其中 <script type="math/tex">r_{be}</script> 是三极管等效交流输入电阻，它的大小通常与基极体积电阻 <script type="math/tex">r_{bb}</script> 有关，给出公式如下</p>
+<script type="math/tex; mode=display">r_{be}=r_{bb}+\beta\cdot\frac{U_T}{I_{CQ}}</script><p>其中 <script type="math/tex">\frac{U_T}{I_{CQ}}</script> 为波尔兹曼常数， <script type="math/tex">U_T</script> 通常是26mv。</p>
+<h3 id="放大电路动态参数"><a href="#放大电路动态参数" class="headerlink" title="放大电路动态参数"></a>放大电路动态参数</h3><p>电压放大倍数 <script type="math/tex">A_u</script> ，等效输入电阻 <script type="math/tex">R_{in}</script> ，输出电阻 <script type="math/tex">R_{on}</script> 是放大电路最主要的动态参数。<br>画出微变等效电路如下：<br><img src="/img/ac2.jpg" alt="交流回路1"></p>
+<script type="math/tex; mode=display">A_u=\frac{U_{on}}{U_{in}}=\frac{\beta I_b\cdot(R_C||R_L)}{r_{be}\cdot I_b}=\frac{\beta \cdot (R_C||R_L)}{r_{be}}</script><script type="math/tex; mode=display">R_{in}=\frac{U_{in}}{I_{in}}=R_{b1}||R_{b2}||r_{be}</script><script type="math/tex; mode=display">R_{on}=R_C</script><p>如果去除 <script type="math/tex">R_e</script> 旁的旁路电容电路则会变成：<br><img src="/img/ac1.jpg" alt="交流回路2"><br>此时旁路电阻 <script type="math/tex">R_e</script> 导通，并且我们可以知道的是 <script type="math/tex">R_e</script> 上的电流是 <script type="math/tex">r_{be}</script> 与受控源上电流的合成即</p>
+<script type="math/tex; mode=display">I_{R_e}=I_b+\beta I_b=(1+\beta)\cdot I_b</script><p>感兴趣的朋友可以求一下此时放大电路的动态参数，相信这种简单电路对于牛博士来说肯定不在话下。</p>
+<h1 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h1><h2 id="图解法求解静态工作点"><a href="#图解法求解静态工作点" class="headerlink" title="图解法求解静态工作点"></a>图解法求解静态工作点</h2><p>太烦了，建议自己翻书。</p>
+<h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>电子电路原理和模电课结课已经有不少时间了，我写这篇文章时可能也会有不少知识上的遗漏和谬误，但如果能让牛哥了解更多有关电路的知识，我也就知足了。<br>由于电子方面分析时的计算与公式特别多，为了文章的美观我采用了<strong>mathjax</strong>来渲染数学公式，但在实际使用中我发现mathjax与markdown有一些冲突的地方，辟如mathjax的字母下标<code>_</code>在markdown之中是倾斜字体的标识符，在html中可能会变成<code>&lt;em&gt;&lt;/em&gt;</code>的强调文本的标签，使公式无法渲染。我参考网上的方法写了一段JS来区分mathjax与markdown产生的html标签，当然也可以通过修改hexo渲染器的源码来解决问题。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ryujopad</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.higuchi.xyz/2021/07/24/2021-7-24/">https://blog.higuchi.xyz/2021/07/24/2021-7-24/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.higuchi.xyz" target="_blank">RyujoPad's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E6%A8%A1%E7%94%B5/">模电</a><a class="post-meta__tags" href="/tags/%E7%94%B5%E5%AD%90/">电子</a><a class="post-meta__tags" href="/tags/%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF/">放大电路</a></div><div class="post_share"><div class="social-share" data-image="/img/SW2.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/09/19/2021-9-19/"><img class="prev-cover" src="/img/gl&amp;pl.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">祭月仲秋</div></div></a></div><div class="next-post pull-right"><a href="/2021/07/09/2021-7-9/"><img class="next-cover" src="/img/night.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">十桥夜话</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/12/10/2021-12-10/" title="基于8051的天气显示系统"><img class="cover" src="/img/chigusa.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-10</div><div class="title">基于8051的天气显示系统</div></div></a></div><div><a href="/2021/02/18/2021-2-18/" title="指针与引用与参数传递"><img class="cover" src="/img/casa.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-18</div><div class="title">指针与引用与参数传递</div></div></a></div><div><a href="/2021/03/11/2021-3-10/" title="在Vscode上配置Java"><img class="cover" src="/img/akiyama.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-10</div><div class="title">在Vscode上配置Java</div></div></a></div><div><a href="/2021/03/21/2021-3-21/" title="在Visual Studio上配置Qt框架"><img class="cover" src="/img/mrx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-21</div><div class="title">在Visual Studio上配置Qt框架</div></div></a></div><div><a href="/2021/05/13/2021-5-13/" title="初探Java(1)-数组填充与迭代"><img class="cover" src="/img/tieo1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-13</div><div class="title">初探Java(1)-数组填充与迭代</div></div></a></div><div><a href="/2021/09/27/2021-9-27/" title="基于ESP32的水墨屏播放器"><img class="cover" src="/img/pl2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-27</div><div class="title">基于ESP32的水墨屏播放器</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/unnamed.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ryujopad</div><div class="author-info__description">EE新生，前后端苦手</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/quantum818"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quantum818" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:R8.314@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">前途是光明的，道路是曲折的</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">基础电路分析方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E5%AD%94%E5%88%86%E6%9E%90%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">网孔分析法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%A0%E5%8A%A0%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">叠加法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%ACCE%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">基本CE放大电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B4%E6%B5%81%E5%88%86%E6%9E%90"><span class="toc-number">3.1.</span> <span class="toc-text">直流分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%B7%A5%E4%BD%9C%E7%82%B9Q"><span class="toc-number">3.1.1.</span> <span class="toc-text">静态工作点Q</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E6%B5%81%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">交流分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CCCS%E7%AD%89%E6%95%88%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.1.</span> <span class="toc-text">CCCS等效模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0"><span class="toc-number">3.2.2.</span> <span class="toc-text">放大电路动态参数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E8%A7%A3%E6%B3%95%E6%B1%82%E8%A7%A3%E9%9D%99%E6%80%81%E5%B7%A5%E4%BD%9C%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">图解法求解静态工作点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="toc-number">5.</span> <span class="toc-text">碎碎念</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云"><img src="/img/SICKHACK.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="鉴证的逻辑(1)——极权国家、全民党与乌云"/></a><div class="content"><a class="title" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云">鉴证的逻辑(1)——极权国家、全民党与乌云</a><time datetime="2023-04-05T08:27:56.000Z" title="发表于 2023-04-05 16:27:56">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测"><img src="/img/bocchi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用三种卷积核算子进行图片边缘检测"/></a><div class="content"><a class="title" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测">利用三种卷积核算子进行图片边缘检测</a><time datetime="2022-11-17T17:16:49.000Z" title="发表于 2022-11-18 01:16:49">2022-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV"><img src="/img/Ardan.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在64位树莓派上部署OpenCV"/></a><div class="content"><a class="title" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV">在64位树莓派上部署OpenCV</a><time datetime="2022-10-01T09:36:35.000Z" title="发表于 2022-10-01 17:36:35">2022-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"><img src="/img/Avator.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"/></a><div class="content"><a class="title" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机">初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</a><time datetime="2022-05-15T14:02:30.000Z" title="发表于 2022-05-15 22:02:30">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"><img src="/img/rudolf.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"/></a><div class="content"><a class="title" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆">明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</a><time datetime="2022-04-16T18:07:10.000Z" title="发表于 2022-04-17 02:07:10">2022-04-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By ryujopad</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'fraXQvUf8J0MiqNFrpC44hJ8-gzGzoHsz',
+      appKey: 'P99TjRU8Y9Sn4OGj3JbGstsC',
+      placeholder: '欢迎大家来评论，摩多摩多~',
+      avatar: 'mp',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/umamusume.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><style>.uma_parent {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 6px rgb(7 17 27 / 6%);
+  margin: 10px;
+  padding: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.uma_parent:hover {
+  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
+}
+
+#uma-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.umamusume-newUma {
+  background: #ff3852
+}
+
+.umamusume-twitter {
+  background: #ff9406
+}
+
+.umamusume-supportCard {
+  background: #00b7ee
+}
+
+.umamusume-notice {
+  background: #ff6f49
+}
+
+.umamusume-notice-ad {
+  background: #332B33
+}
+
+.umamusume-activity {
+  background: #f86400
+}
+
+.umamusume-list-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.umamusume-title {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.umamusume-hotness {
+  margin: 3px 5px;
+  padding: 1px 4px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+}</style><script>let html = '<div class="uma-list">';
+
+let uma_parent = document.createElement("div");
+uma_parent.classList.add("uma_parent");
+
+let uma_container = document.createElement("div");
+uma_container.setAttribute("id", "uma-container");
+
+let hotness = {
+  日服公告: "umamusume-notice-ad",
+  周报速览: "umamusume-twitter",
+  当前活动: "umamusume-activity",
+  马娘卡池: "umamusume-newUma",
+  支援卡池: "umamusume-supportCard",
+};
+var url = "https://wiki.biligame.com/umamusume/api.php";
+var targetUrl = "https://wiki.biligame.com/umamusume/";
+var params1 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "公告",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params2 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "赛马娘卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params3 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "剧情活动",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params4 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "支援卡卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params5 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "竞技场周报",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+url = url + "?origin=*";
+//
+Object.keys(params1).forEach(function (key) {
+  url += "&" + key + "=" + params1[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["日服公告"] +
+      '">' +
+      "日服公告" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[0].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[0].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[0].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params2).forEach(function (key) {
+  url += "&" + key + "=" + params2[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["马娘卡池"] +
+      '">' +
+      "马娘卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params4).forEach(function (key) {
+  url += "&" + key + "=" + params4[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["支援卡池"] +
+      '">' +
+      "支援卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params3).forEach(function (key) {
+  url += "&" + key + "=" + params3[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("活动")!=-1){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["当前活动"] +
+      '">' +
+      "当前活动" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+Object.keys(params5).forEach(function (key) {
+  url += "&" + key + "=" + params5[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("繁中")==-1 && data != 0){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["周报速览"] +
+      '">' +
+      "周报速览" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+const jx_div = document.createElement("div");
+jx_div.innerHTML = `<i class="fas fa-horse-head"> UMA特雷森校历 </i>`;
+jx_div.classList.add("jx");
+uma_parent.appendChild(jx_div);
+uma_parent.appendChild(uma_container);
+
+const card = document.getElementsByTagName("uma-card")[0];
+card.parentNode.replaceChild(uma_parent, card);
+</script><!-- hexo injector body_end end --></body></html>

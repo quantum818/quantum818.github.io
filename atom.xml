@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>RyujoPad&#39;s Blog</title>
+  <icon>https://blog.higuchi.xyz/icon.png</icon>
+  
+  <link href="https://blog.higuchi.xyz/atom.xml" rel="self"/>
+  
+  <link href="https://blog.higuchi.xyz/"/>
+  <updated>2024-02-22T07:39:27.851Z</updated>
+  <id>https://blog.higuchi.xyz/</id>
+  
+  <author>
+    <name>ryujopad</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>鉴证的逻辑(1)——极权国家、全民党与乌云</title>
+    <link href="https://blog.higuchi.xyz/2023/04/05/2023-4-9/"/>
+    <id>https://blog.higuchi.xyz/2023/04/05/2023-4-9/</id>
+    <published>2023-04-05T08:27:56.000Z</published>
+    <updated>2024-02-22T07:39:27.851Z</updated>
+    
+    
+    <summary type="html">博主没有似，只是去考研了</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用三种卷积核算子进行图片边缘检测</title>
+    <link href="https://blog.higuchi.xyz/2022/11/18/2022-11-18/"/>
+    <id>https://blog.higuchi.xyz/2022/11/18/2022-11-18/</id>
+    <published>2022-11-17T17:16:49.000Z</published>
+    <updated>2022-11-25T04:08:48.402Z</updated>
+    
+    
+    <summary type="html">cover:twitter@BTR_anime</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="OpenCV" scheme="https://blog.higuchi.xyz/tags/OpenCV/"/>
+    
+    <category term="数字图像处理" scheme="https://blog.higuchi.xyz/tags/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在64位树莓派上部署OpenCV</title>
+    <link href="https://blog.higuchi.xyz/2022/10/01/2022-10-1/"/>
+    <id>https://blog.higuchi.xyz/2022/10/01/2022-10-1/</id>
+    <published>2022-10-01T09:36:35.000Z</published>
+    <updated>2022-11-17T16:36:57.900Z</updated>
+    
+    
+    <summary type="html">真的没有鸽</summary>
+    
+    
+    
+    
+    <category term="嵌入式" scheme="https://blog.higuchi.xyz/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    <category term="Linux" scheme="https://blog.higuchi.xyz/tags/Linux/"/>
+    
+    <category term="树莓派" scheme="https://blog.higuchi.xyz/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/"/>
+    
+    <category term="OpenCV" scheme="https://blog.higuchi.xyz/tags/OpenCV/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</title>
+    <link href="https://blog.higuchi.xyz/2022/05/15/2022-5-15/"/>
+    <id>https://blog.higuchi.xyz/2022/05/15/2022-5-15/</id>
+    <published>2022-05-15T14:02:30.000Z</published>
+    <updated>2022-06-09T14:02:31.638Z</updated>
+    
+    
+    <summary type="html">起因是国美全栈高材生的一次奇葩需求。</summary>
+    
+    
+    
+    
+    <category term="Unity" scheme="https://blog.higuchi.xyz/tags/Unity/"/>
+    
+    <category term="C#" scheme="https://blog.higuchi.xyz/tags/C/"/>
+    
+    <category term="MMD" scheme="https://blog.higuchi.xyz/tags/MMD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</title>
+    <link href="https://blog.higuchi.xyz/2022/04/17/2022-4-17/"/>
+    <id>https://blog.higuchi.xyz/2022/04/17/2022-4-17/</id>
+    <published>2022-04-16T18:07:10.000Z</published>
+    <updated>2022-04-20T16:03:06.281Z</updated>
+    
+    
+    <summary type="html">和穿的跟娘炮似的长州佬在一起怎么能搞好政治呢</summary>
+    
+    
+    
+    
+    <category term="胡说八道" scheme="https://blog.higuchi.xyz/tags/%E8%83%A1%E8%AF%B4%E5%85%AB%E9%81%93/"/>
+    
+    <category term="杂谈" scheme="https://blog.higuchi.xyz/tags/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="历史虚无" scheme="https://blog.higuchi.xyz/tags/%E5%8E%86%E5%8F%B2%E8%99%9A%E6%97%A0/"/>
+    
+    <category term="大概是给牛哥的生日贺文" scheme="https://blog.higuchi.xyz/tags/%E5%A4%A7%E6%A6%82%E6%98%AF%E7%BB%99%E7%89%9B%E5%93%A5%E7%9A%84%E7%94%9F%E6%97%A5%E8%B4%BA%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>搭建基于CLion的STM32嵌入式开发环境</title>
+    <link href="https://blog.higuchi.xyz/2022/02/24/2022-2-24/"/>
+    <id>https://blog.higuchi.xyz/2022/02/24/2022-2-24/</id>
+    <published>2022-02-23T17:46:41.000Z</published>
+    <updated>2022-03-31T13:38:52.379Z</updated>
+    
+    
+    <summary type="html">pixiv:95869858</summary>
+    
+    
+    
+    
+    <category term="嵌入式" scheme="https://blog.higuchi.xyz/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    <category term="STM32" scheme="https://blog.higuchi.xyz/tags/STM32/"/>
+    
+    <category term="CLion" scheme="https://blog.higuchi.xyz/tags/CLion/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正月里</title>
+    <link href="https://blog.higuchi.xyz/2022/01/31/2022-1-31/"/>
+    <id>https://blog.higuchi.xyz/2022/01/31/2022-1-31/</id>
+    <published>2022-01-30T17:12:43.000Z</published>
+    <updated>2022-02-23T16:45:28.349Z</updated>
+    
+    
+    <summary type="html">年味渐浓</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于8051的天气显示系统</title>
+    <link href="https://blog.higuchi.xyz/2021/12/10/2021-12-10/"/>
+    <id>https://blog.higuchi.xyz/2021/12/10/2021-12-10/</id>
+    <published>2021-12-10T14:27:10.000Z</published>
+    <updated>2021-12-12T13:12:52.133Z</updated>
+    
+    
+    <summary type="html">pixiv:83779894</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="单片机" scheme="https://blog.higuchi.xyz/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+    <category term="嵌入式" scheme="https://blog.higuchi.xyz/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    <category term="8051" scheme="https://blog.higuchi.xyz/tags/8051/"/>
+    
+    <category term="蓝牙" scheme="https://blog.higuchi.xyz/tags/%E8%93%9D%E7%89%99/"/>
+    
+    <category term="Andriod" scheme="https://blog.higuchi.xyz/tags/Andriod/"/>
+    
+    <category term="串口通信" scheme="https://blog.higuchi.xyz/tags/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/"/>
+    
+    <category term="总线协议" scheme="https://blog.higuchi.xyz/tags/%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>基于ESP32的水墨屏播放器</title>
+    <link href="https://blog.higuchi.xyz/2021/09/27/2021-9-27/"/>
+    <id>https://blog.higuchi.xyz/2021/09/27/2021-9-27/</id>
+    <published>2021-09-26T16:47:30.000Z</published>
+    <updated>2021-10-17T09:25:33.112Z</updated>
+    
+    
+    <summary type="html">pixiv:64049896</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="单片机" scheme="https://blog.higuchi.xyz/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+    <category term="嵌入式" scheme="https://blog.higuchi.xyz/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/"/>
+    
+    <category term="esp32" scheme="https://blog.higuchi.xyz/tags/esp32/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>祭月仲秋</title>
+    <link href="https://blog.higuchi.xyz/2021/09/19/2021-9-19/"/>
+    <id>https://blog.higuchi.xyz/2021/09/19/2021-9-19/</id>
+    <published>2021-09-18T18:04:42.000Z</published>
+    <updated>2021-09-21T13:42:23.259Z</updated>
+    
+    
+    <summary type="html">月亮降注的光芒,数千年都不变。</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探电子电路(1)-分离元件放大电路分析方法</title>
+    <link href="https://blog.higuchi.xyz/2021/07/24/2021-7-24/"/>
+    <id>https://blog.higuchi.xyz/2021/07/24/2021-7-24/</id>
+    <published>2021-07-24T13:14:24.000Z</published>
+    <updated>2021-08-01T17:13:33.635Z</updated>
+    
+    
+    <summary type="html">pixiv:61996056</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="模电" scheme="https://blog.higuchi.xyz/tags/%E6%A8%A1%E7%94%B5/"/>
+    
+    <category term="电子" scheme="https://blog.higuchi.xyz/tags/%E7%94%B5%E5%AD%90/"/>
+    
+    <category term="放大电路" scheme="https://blog.higuchi.xyz/tags/%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>十桥夜话</title>
+    <link href="https://blog.higuchi.xyz/2021/07/09/2021-7-9/"/>
+    <id>https://blog.higuchi.xyz/2021/07/09/2021-7-9/</id>
+    <published>2021-07-09T11:53:04.000Z</published>
+    <updated>2022-03-15T16:08:49.891Z</updated>
+    
+    
+    <summary type="html">我们忘了许多，也许留下的的才是真正值得记住的东西。</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+    <category term="练笔" scheme="https://blog.higuchi.xyz/tags/%E7%BB%83%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>初探Java(1)-数组填充与迭代</title>
+    <link href="https://blog.higuchi.xyz/2021/05/13/2021-5-13/"/>
+    <id>https://blog.higuchi.xyz/2021/05/13/2021-5-13/</id>
+    <published>2021-05-13T07:04:04.000Z</published>
+    <updated>2021-05-14T09:09:41.078Z</updated>
+    
+    
+    <summary type="html">pixiv:89769130</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Java" scheme="https://blog.higuchi.xyz/tags/Java/"/>
+    
+    <category term="内存操作" scheme="https://blog.higuchi.xyz/tags/%E5%86%85%E5%AD%98%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>献给努力家的赞歌</title>
+    <link href="https://blog.higuchi.xyz/2021/04/15/2021-4-15/"/>
+    <id>https://blog.higuchi.xyz/2021/04/15/2021-4-15/</id>
+    <published>2021-04-14T17:30:45.000Z</published>
+    <updated>2021-04-15T03:58:14.882Z</updated>
+    
+    
+    <summary type="html">“小栗帽，你这个喂不饱的女人”</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+    <category term="赛马" scheme="https://blog.higuchi.xyz/tags/%E8%B5%9B%E9%A9%AC/"/>
+    
+    <category term="小栗帽" scheme="https://blog.higuchi.xyz/tags/%E5%B0%8F%E6%A0%97%E5%B8%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>海大异国爱情故事·终</title>
+    <link href="https://blog.higuchi.xyz/2021/04/12/2021-4-11/"/>
+    <id>https://blog.higuchi.xyz/2021/04/12/2021-4-11/</id>
+    <published>2021-04-11T15:45:55.000Z</published>
+    <updated>2021-04-14T16:36:40.388Z</updated>
+    
+    
+    <summary type="html">“于是，形同陌路的两人的命运，在此交织在了一起”——《我的海大青春恋爱物语是否搞错了什么·序》</summary>
+    
+    
+    
+    
+    <category term="music" scheme="https://blog.higuchi.xyz/tags/music/"/>
+    
+    <category term="牛哥" scheme="https://blog.higuchi.xyz/tags/%E7%89%9B%E5%93%A5/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Visual Studio上配置Qt框架</title>
+    <link href="https://blog.higuchi.xyz/2021/03/21/2021-3-21/"/>
+    <id>https://blog.higuchi.xyz/2021/03/21/2021-3-21/</id>
+    <published>2021-03-21T08:23:20.000Z</published>
+    <updated>2022-04-18T07:09:36.632Z</updated>
+    
+    
+    <summary type="html">pixiv:88564639</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="cpp" scheme="https://blog.higuchi.xyz/tags/cpp/"/>
+    
+    <category term="visual studio" scheme="https://blog.higuchi.xyz/tags/visual-studio/"/>
+    
+    <category term="qt6" scheme="https://blog.higuchi.xyz/tags/qt6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Vscode上配置Java</title>
+    <link href="https://blog.higuchi.xyz/2021/03/11/2021-3-10/"/>
+    <id>https://blog.higuchi.xyz/2021/03/11/2021-3-10/</id>
+    <published>2021-03-10T15:15:10.000Z</published>
+    <updated>2021-03-10T16:08:50.701Z</updated>
+    
+    
+    <summary type="html">pixiv:84288222</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="Java" scheme="https://blog.higuchi.xyz/tags/Java/"/>
+    
+    <category term="vscode" scheme="https://blog.higuchi.xyz/tags/vscode/"/>
+    
+    <category term="JavaSE11" scheme="https://blog.higuchi.xyz/tags/JavaSE11/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>指针与引用与参数传递</title>
+    <link href="https://blog.higuchi.xyz/2021/02/18/2021-2-18/"/>
+    <id>https://blog.higuchi.xyz/2021/02/18/2021-2-18/</id>
+    <published>2021-02-18T10:33:36.000Z</published>
+    <updated>2022-04-18T07:09:33.212Z</updated>
+    
+    
+    <summary type="html">pixiv:84526676</summary>
+    
+    
+    
+    
+    <category term="学习" scheme="https://blog.higuchi.xyz/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="C" scheme="https://blog.higuchi.xyz/tags/C/"/>
+    
+    <category term="cpp" scheme="https://blog.higuchi.xyz/tags/cpp/"/>
+    
+    <category term="指针" scheme="https://blog.higuchi.xyz/tags/%E6%8C%87%E9%92%88/"/>
+    
+    <category term="引用" scheme="https://blog.higuchi.xyz/tags/%E5%BC%95%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>岁末冬绥</title>
+    <link href="https://blog.higuchi.xyz/2021/02/11/2021-2-11/"/>
+    <id>https://blog.higuchi.xyz/2021/02/11/2021-2-11/</id>
+    <published>2021-02-11T09:44:15.000Z</published>
+    <updated>2021-02-18T09:01:41.754Z</updated>
+    
+    
+    <summary type="html">life is not always what one likes</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+    <category term="总结" scheme="https://blog.higuchi.xyz/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>孤岛夜分</title>
+    <link href="https://blog.higuchi.xyz/2021/02/04/2021-2-3/"/>
+    <id>https://blog.higuchi.xyz/2021/02/04/2021-2-3/</id>
+    <published>2021-02-03T15:58:25.000Z</published>
+    <updated>2021-02-03T15:30:54.832Z</updated>
+    
+    
+    <summary type="html">无聊时候的回忆</summary>
+    
+    
+    
+    
+    <category term="闲谈" scheme="https://blog.higuchi.xyz/tags/%E9%97%B2%E8%B0%88/"/>
+    
+  </entry>
+  
+</feed>

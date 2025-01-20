@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>基于8051的天气显示系统 | RyujoPad's Blog</title><meta name="keywords" content="学习,单片机,嵌入式,8051,蓝牙,Andriod,串口通信,总线协议"><meta name="author" content="ryujopad"><meta name="copyright" content="ryujopad"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="pixiv:83779894">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于8051的天气显示系统">
+<meta property="og:url" content="https://blog.higuchi.xyz/2021/12/10/2021-12-10/index.html">
+<meta property="og:site_name" content="RyujoPad&#39;s Blog">
+<meta property="og:description" content="pixiv:83779894">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.higuchi.xyz/img/chigusa.png">
+<meta property="article:published_time" content="2021-12-10T14:27:10.000Z">
+<meta property="article:modified_time" content="2021-12-12T13:12:52.133Z">
+<meta property="article:author" content="ryujopad">
+<meta property="article:tag" content="学习">
+<meta property="article:tag" content="单片机">
+<meta property="article:tag" content="嵌入式">
+<meta property="article:tag" content="8051">
+<meta property="article:tag" content="蓝牙">
+<meta property="article:tag" content="Andriod">
+<meta property="article:tag" content="串口通信">
+<meta property="article:tag" content="总线协议">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.higuchi.xyz/img/chigusa.png"><link rel="shortcut icon" href="/img/chigusa3.png"><link rel="canonical" href="https://blog.higuchi.xyz/2021/12/10/2021-12-10/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-12-12 21:12:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="/css/umamusume.css"><meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="RyujoPad's Blog" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/unnamed.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/chigusa.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">RyujoPad's Blog</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/bangumi/"><i class="fa-fw fas fa-video"></i><span> 追剧</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 相关</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">基于8051的天气显示系统</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-10T14:27:10.000Z" title="发表于 2021-12-10 22:27:10">2021-12-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-12-12T13:12:52.133Z" title="更新于 2021-12-12 21:12:52">2021-12-12</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><em>＂失败不总是很常见的，放弃才是 ＂</em></strong></p>
+<h1 id="开头在这"><a href="#开头在这" class="headerlink" title="开头在这"></a>开头在这</h1><p>　　大二学了单片机，本来想趁着课程设计的机会好好玩一把ESP32，但被老师告知课设就两周乖乖用51吧。一想到必须回去用屎一样的8051，我就只能像和超进化批元帅打游戏时候一样无语。于是想着干脆白兰的我开始思考8051能干些什么，几百字节的RAM，最好的加强型也只有60KB的扩展FLASH，不仅IO口资源稀缺，串口也只有一两个。硬件资源稀缺，加上它的各种库和指令集也只能用简陋来形容。没有专用的串口通信库，没有并行的串口。除了能拿来控制电机，做一些传感器的小项目好像也没什么用。看了周围的同学，果不其然绝大多数不是上淘宝买课设，就是上网抄现成的贪吃蛇和俄罗斯方块。课设每个学期都有，虽然我自知做不到牛哥那样一转专业就把整个大一课设做完那样的壮举。毕竟不是每个人能被评价为“班上学的最好的”，但我还是想要做点什么。看了一圈STC的所有系列，只有15和12集成了SPI和I2C总线控制器，下位机烂怎么办，那只能搞上位机控制了。要不整个HC05搞个天气预报吧，我觉得行。虽然STC的8051属于是烂中烂，但至少便宜。我选的STC15F2KS60只要4,5块，60KBFLASH，2048RAM，两个异步通信串口，内部集成SPI和I2C，至少现在看上去还不错。  </p>
+<h1 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h1><p>　　感觉没什么好说的，因为大量采用模块的缘故，电路相当简易，甚至可以去掉外部晶振和复位电路，只依靠MCU内部的晶振来提高集成度。关于显示室温的功能，我选择了DHT11传感器。然而软硬双修的牛哥对我的方案嗤之以鼻，精通数模电和软件的他提出了采用湿敏电阻，运算放大电路和AD转换芯片的方案，让才学浅薄的我甘拜下风。想必牛哥一定是自己设计一款温湿度IC，但显然对我来说这有些超纲了。我还是用简单易懂的DHT11吧。<br><img src="/img/weatherdisplay_sheet.jpg" alt="原理图"><br><del>其实打板的时候才发现CH340G的Rxd和Txd连反了，这下不仅浪费了一个串口，原来打算的下载电路只能拿来供电了</del></p>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><h2 id="Andriod-SDK"><a href="#Andriod-SDK" class="headerlink" title="Andriod SDK"></a>Andriod SDK</h2><p>　　既然做了那就做全套，正好试试Andriod编程。实际上手感觉…还行？不追求额外功能的我就放了两个button在上面，反正只是作为课设演示用，能把请求天气api得到的天气编码发给HC05就行了。本来这部分是打算交给牛哥做的，只能说他到现在还是没有把程序给我，可能是打算在在上面集成什么先进技术吧，我暂且蒙古。<br><div class="mermaid">graph TD
+A[向天气API请求天气数据] --&gt; B{api是否响应}
+    B --&gt; |否| A
+    B --&gt; |是| C[将JSON字符串转换为String类型的Java实体]
+    C --&gt; D[&quot;截取其中的天气状况,体感温度,气压,风速和云量&quot;]
+    D --&gt; E[编码天气数据]
+    E --&gt; F[开始与HC05连接]
+    F --&gt; G[接收单片机发送的开始标志]
+    G --&gt; H{是否接收到0X43}
+    H --&gt; |是| I[开始传输天气数据]
+    H --&gt; |否| G</div></p>
+<h3 id="Andirod-Bluetooth-Api"><a href="#Andirod-Bluetooth-Api" class="headerlink" title="Andirod Bluetooth Api"></a>Andirod Bluetooth Api</h3><p>　　Andriod的蓝牙api提供了对蓝牙丰富的支持和功能，具体可以阅读Andriod的中文文档<a target="_blank" rel="noopener" href="http://www.android-doc.com/guide/topics/connectivity/bluetooth.html">Andirod Bluetooth</a> 。而实际情况是我并不需要用到如此多且复杂的功能，由于我只需要连接HC05一个设备，Mac的地址就直接写死了。在编写时我用到的只有<code>BluetoothAdapter</code> <code>BluetoothDevice</code> <code>BluetoothSocket</code>这三个类，分别用于蓝牙的连接和信息的收发。<del>丢人的是我一直把Mac地址小写导致总是抛错误，再次体现写之前仔细阅读文档的重要性</del><br>官方文档的蓝牙读写例程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">ConnectedThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothSocket mmSocket;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> InputStream mmInStream;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OutputStream mmOutStream;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConnectedThread</span><span class="params">(BluetoothSocket socket)</span> </span>&#123;</span><br><span class="line">        mmSocket = socket;</span><br><span class="line">        InputStream tmpIn = <span class="keyword">null</span>;</span><br><span class="line">        OutputStream tmpOut = <span class="keyword">null</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Get the input and output streams, using temp objects because</span></span><br><span class="line">        <span class="comment">// member streams are final</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            tmpIn = socket.getInputStream();</span><br><span class="line">            tmpOut = socket.getOutputStream();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line"> </span><br><span class="line">        mmInStream = tmpIn;</span><br><span class="line">        mmOutStream = tmpOut;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];  <span class="comment">// buffer store for the stream</span></span><br><span class="line">        <span class="keyword">int</span> bytes; <span class="comment">// bytes returned from read()</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// Keep listening to the InputStream until an exception occurs</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// Read from the InputStream</span></span><br><span class="line">                bytes = mmInStream.read(buffer);</span><br><span class="line">                <span class="comment">// Send the obtained bytes to the UI activity</span></span><br><span class="line">                mHandler.obtainMessage(MESSAGE_READ, bytes, -<span class="number">1</span>, buffer)</span><br><span class="line">                        .sendToTarget();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* Call this from the main activity to send data to the remote device */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">write</span><span class="params">(<span class="keyword">byte</span>[] bytes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmOutStream.write(bytes);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* Call this from the main activity to shutdown the connection */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mmSocket.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>由于read和write方法都为阻塞调用，所以为了防止线程阻塞将write方法单独写成一个公共方法来向输出流中写入数据。</p>
+<h3 id="天气Api请求与处理"><a href="#天气Api请求与处理" class="headerlink" title="天气Api请求与处理"></a>天气Api请求与处理</h3><p>　　在网上找了一圈没有找到什么好用免费的天气api，原来气象局提供的免费api早在六年前就停运了，除非你想请求到六年前的天气数据。最后我用了一款天气api的免费开发版，关注公众号一天可以免费请求2000次。<br><del>原来打算处理天气JSON的方式</del><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer weathertu=<span class="keyword">new</span> StringBuffer(ind.substring(ind.indexOf(<span class="string">&quot;text&quot;</span>)+<span class="number">7</span>,ind.indexOf(<span class="string">&quot;\&quot;&quot;</span>,ind.indexOf(<span class="string">&quot;text&quot;</span>)+<span class="number">7</span>)));</span><br><span class="line">printLog(weathertu.toString());</span><br><span class="line">StringBuffer feelsLike=<span class="keyword">new</span> StringBuffer(ind.substring(ind.indexOf(<span class="string">&quot;feelsLike&quot;</span>)+<span class="number">12</span>,ind.indexOf(<span class="string">&quot;\&quot;&quot;</span>,ind.indexOf(<span class="string">&quot;feelsLike&quot;</span>)+<span class="number">12</span>)));</span><br><span class="line">printLog(feelsLike.toString());</span><br><span class="line">StringBuffer windSpeed=<span class="keyword">new</span> StringBuffer(ind.substring(ind.indexOf(<span class="string">&quot;windSpeed&quot;</span>)+<span class="number">12</span>,ind.indexOf(<span class="string">&quot;\&quot;&quot;</span>,ind.indexOf(<span class="string">&quot;windSpeed&quot;</span>)+<span class="number">12</span>)));</span><br><span class="line">printLog(windSpeed.toString());</span><br><span class="line">StringBuffer pressure=<span class="keyword">new</span> StringBuffer(ind.substring(ind.indexOf(<span class="string">&quot;pressure&quot;</span>)+<span class="number">11</span>,ind.indexOf(<span class="string">&quot;\&quot;&quot;</span>,ind.indexOf(<span class="string">&quot;pressure&quot;</span>)+<span class="number">11</span>)));</span><br><span class="line">printLog(windSpeed.toString());</span><br></pre></td></tr></table></figure><br>哈哈原来JSON可以调库来将JSON字符串转换为JAVA实体类来处理。Java自带的JSON处理库实属不太行，而<code>net.sf.json</code>的依赖包Andriod用不了，网上冲浪之后发现能用Google的gson库。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Gson gson = <span class="keyword">new</span> Gson();</span><br><span class="line">Bean beanOne = gson.fromJson(ind, Bean.class);</span><br></pre></td></tr></table></figure></p>
+<h2 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h2><p>　　只有在MCU上写程序时才明白大内存的好处，每定义一个变量都要精打细算，担惊受怕会不会超出内存。</p>
+<h3 id="串口1硬件管脚选择"><a href="#串口1硬件管脚选择" class="headerlink" title="串口1硬件管脚选择"></a>串口1硬件管脚选择</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ACC = P_SW1;             <span class="comment">//外部硬件引腳選擇</span></span><br><span class="line">ACC &amp;= ~(S1_S0 | S1_S1); <span class="comment">//S1_S0=1 S1_S1=0</span></span><br><span class="line">ACC |= S1_S0;            <span class="comment">//(P3.6/RxD_2, P3.7/TxD_2)</span></span><br><span class="line">P_SW1 = ACC;</span><br></pre></td></tr></table></figure>
+<p>令人欣慰的是STC15F2K60S的两个串口可以在五组硬件管脚中选择来实现多个串口的分时复用，至少STC已经把8051的性能榨的够干了，想必五十年前的intel也无法想到自己的8051能用到五十年后。<br><img src="/img/STC15F2K60S.png" alt="串口地址"><br>AUXR1(ACC)寄存器中的<code>S1_S0</code>和<code>S1_S1</code>两位表示串口1的硬件地址选择S1_S1=0,S1_S0=1时串口选择到我定义的P3^6和P3^7口。</p>
+<h3 id="串口中断"><a href="#串口中断" class="headerlink" title="串口中断"></a>串口中断</h3><p>　　所谓的蓝牙收发其实就是蓝牙模块与MCU的串口通信罢了。辅助寄存器<code>AUXR</code>中的<code>UART_M0x6</code>用于设置串口1在方式0时数据传输的波特率，置1时波特率为fsys/2，置0时波特率为fsys/12,也就是选择51单片机的12T和6T时钟模式。然后通过初始化定时器1的初始值<code>TH1</code>和<code>TL1</code>来定义串口与HC05通信时的波特率，打开串口1的总中断和接收中断，中断号4。（波特率计算可以通过STC的烧录软件生成）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UsartConfiguration</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">SCON = <span class="number">0x50</span>;		<span class="comment">//8位数据,可变波特率</span></span><br><span class="line">AUXR |= <span class="number">0x40</span>;		<span class="comment">//定时器时钟1T模式</span></span><br><span class="line">AUXR &amp;= <span class="number">0xFE</span>;		<span class="comment">//串口1选择定时器1为波特率发生器</span></span><br><span class="line">TMOD &amp;= <span class="number">0x0F</span>;		<span class="comment">//设置定时器模式</span></span><br><span class="line">TL1 = <span class="number">0x41</span>;		<span class="comment">//设置定时初始值</span></span><br><span class="line">TH1 = <span class="number">0xFD</span>;		<span class="comment">//设置定时初始值</span></span><br><span class="line"><span class="comment">//ET1 = 0;		//禁止定时器%d中断</span></span><br><span class="line"><span class="comment">//TR1 = 1;		//定时器1开始计时</span></span><br><span class="line">ES = <span class="number">1</span>;  <span class="comment">//打开接收中断</span></span><br><span class="line">EA = <span class="number">1</span>;  <span class="comment">//打开总中断</span></span><br><span class="line">TR1 = <span class="number">1</span>; <span class="comment">//打开计数器1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br><code>SBUF</code>是MCU的串口缓存寄存器，用来缓存串口接收和准备发送的数据内容。<br>串口中断服务程序<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Usart</span><span class="params">()</span> interrupt 4 <span class="comment">//串口1接收中断</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">if</span> (RI)</span><br><span class="line">    &#123;</span><br><span class="line">        statser = <span class="number">0</span>;</span><br><span class="line">        receiveData = SBUF; <span class="comment">//出去接收到的数据</span></span><br><span class="line">        RI = <span class="number">0</span>;             <span class="comment">//清除接收中断标志位</span></span><br><span class="line">        SBUF = receiveData; <span class="comment">//将接收到的数据放入到发送寄存器</span></span><br><span class="line">        <span class="keyword">if</span> (receiveData != <span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            getinfo[times] = receiveData;</span><br><span class="line">            times++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ifgetcompete = <span class="number">1</span>;</span><br><span class="line">            ifget = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!TI)</span><br><span class="line">            ;   <span class="comment">//等待发送数据完成</span></span><br><span class="line">        TI = <span class="number">0</span>; <span class="comment">//清除发送完成标志位</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>串口数据发送<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostChar</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> character)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;     </span><br><span class="line">	    SBUF=character;   <span class="comment">//发送单个字符</span></span><br><span class="line">	    <span class="keyword">while</span>(!TI);TI=<span class="number">0</span>; <span class="comment">//发送完成标志 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="DHT11"><a href="#DHT11" class="headerlink" title="DHT11"></a>DHT11</h3><p>　　DHT11是通过单总线协议（1-wire）来向MCU发送数据的传感器，也就是说它有着严格的时序控制。通过一定的延时来处理传感器的初始化与数据的读写。通过单总线协议，DHT11一共会向总线发送一串40bit的数据。包括了元件的温湿度整数及小数位和校验位，分别是8bit湿度整数+8bit湿度小数+8bit温度整数+8bit温度小数+8bit校验位。</p>
+<h3 id="单总线协议"><a href="#单总线协议" class="headerlink" title="单总线协议"></a>单总线协议</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p><img src="/img/1wire_1.png" alt="单总线初始化"><br>MCU在总线上发送480 ~ 960 us的低电平来产生16-60us的高电平复位脉冲给从机。从机再将总线拉低60-240us来应答MCU，最后从机发送高电平应答脉冲来表示初始化完成。<br>　　对于DHT11来说主机的起始信号应该在18ms左右，再次高电平是开始发送数据。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Start</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	DATA=<span class="number">0</span>;<span class="comment">//将总线拉低</span></span><br><span class="line">	Delay20ms();<span class="comment">//延时20ms这样DHT11可以检测到主机发送的起始信号，然后就可以开始发出响应信号</span></span><br><span class="line">	DATA=<span class="number">1</span>;<span class="comment">//将总线拉高</span></span><br><span class="line">	Delay30us();</span><br><span class="line">	DATA=<span class="number">1</span>;<span class="comment">//二次拉高总线开始传输数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="写间隙"><a href="#写间隙" class="headerlink" title="写间隙"></a>写间隙</h4><p><img src="/img/1wire_2.png" alt="单总线写间隙"></p>
+<h4 id="读间隙"><a href="#读间隙" class="headerlink" title="读间隙"></a>读间隙</h4><p><img src="/img/1wire_3.png" alt="单总线读间隙"><br>初始化之后总线低电平12-14us表示开始传输1bit，也就是传输每一bit之间的间隔信号。开始信号后26-28us高电平表示bit值为0，116-118us高电平则表示1。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">readdht11_byte</span><span class="params">()</span> <span class="comment">//读取DHT11发送的每一个bit</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">  <span class="keyword">int</span> i,dht;  </span><br><span class="line">  <span class="keyword">for</span>(i=<span class="number">8</span>;i&gt;<span class="number">0</span>;i--)<span class="comment">//读取8bit数据</span></span><br><span class="line">  &#123;      </span><br><span class="line">    dht=dht&lt;&lt;<span class="number">1</span>;<span class="comment">//每次读取前，将数据的高位移位向左移位</span></span><br><span class="line">    <span class="keyword">while</span>(!DATA);<span class="comment">//等待0us分隔信号</span></span><br><span class="line">	Delay35us();<span class="comment">//等待35us</span></span><br><span class="line">    <span class="keyword">if</span>(DATA==<span class="number">1</span>) <span class="comment">//延时35us后依然是高电平说明bit值是1</span></span><br><span class="line">  	&#123;</span><br><span class="line">      dht=dht|<span class="number">0x01</span>;<span class="comment">//dht的最低位置1</span></span><br><span class="line">      Delay55us();</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="keyword">else</span>;<span class="comment">//bit值为0跳过此次循环仅将dht最低位左移           </span></span><br><span class="line">  &#125; </span><br><span class="line">  <span class="keyword">return</span>(dht);<span class="comment">//将这个dht返回   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>　　这个课设本来是打算三天做完的<span class="mask">然后我就能去复习六级了</span>，然而因为各种原因和不可抗力<span class="mask">海猫真是太好玩辣</span>我硬是做了一个礼拜才搞完。本来想着最简单的硬件部分也出了不少差错。牛哥在Andriod编程上确实是给了我不少帮助，如果他能在星期二把程序给我那我必定狠狠的夸他，在文章末尾还是感谢他。多做做项目确实能提升一些自己的能力，看见成品是也挺有成就感的。这个项目的<a target="_blank" rel="noopener" href="https://github.com/quantum818/weatherdisplay">驱动</a>和<a target="_blank" rel="noopener" href="https://github.com/quantum818/HC05-base-Android-">手机程序</a>已经全部打包上传github，虽然两个东西都<span class="mask">完全</span>没做优化，驱动的按键中断有不少问题，传感器接收的湿度在第一次按按键时是完全不准的。手机程序有可能会因为找不到蓝牙设备而线程溢出，蓝牙连接的关闭也没写。以后有缘会把这些优化都搞完<span class="mask">或者直接用牛哥给我的程序</span>。旅途在第十晚结束，我也终于能进入我的黄金之乡。</p>
+<h1 id="更新2021-12-12"><a href="#更新2021-12-12" class="headerlink" title="更新2021.12.12"></a>更新2021.12.12</h1><p>　　妹想到刚写完博客牛哥就把程序给我了，这下我成小丑了哈哈哈。</p>
+<p><img src="/img/chigusa2.png" alt="蓝发女孩"></p>
+<h2 id="能给可爱的蓝发妹妹点个关注吗"><a href="#能给可爱的蓝发妹妹点个关注吗" class="headerlink" title="能给可爱的蓝发妹妹点个关注吗"></a><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCkngxfPbmGyGl_RIq4FA3MQ">能给可爱的蓝发妹妹点个关注吗</a></h2><style>
+span.mask {
+    background-color: #e0e0eb;
+    color: transparent;
+    transition: color 0.5s;
+}
+
+span.mask:hover {
+    color: #aaaa55;
+    background-color: transparent;
+}
+</style></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ryujopad</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.higuchi.xyz/2021/12/10/2021-12-10/">https://blog.higuchi.xyz/2021/12/10/2021-12-10/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.higuchi.xyz" target="_blank">RyujoPad's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a><a class="post-meta__tags" href="/tags/%E5%8D%95%E7%89%87%E6%9C%BA/">单片机</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a><a class="post-meta__tags" href="/tags/8051/">8051</a><a class="post-meta__tags" href="/tags/%E8%93%9D%E7%89%99/">蓝牙</a><a class="post-meta__tags" href="/tags/Andriod/">Andriod</a><a class="post-meta__tags" href="/tags/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1/">串口通信</a><a class="post-meta__tags" href="/tags/%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE/">总线协议</a></div><div class="post_share"><div class="social-share" data-image="/img/chigusa.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/31/2022-1-31/"><img class="prev-cover" src="/img/spf1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">正月里</div></div></a></div><div class="next-post pull-right"><a href="/2021/09/27/2021-9-27/"><img class="next-cover" src="/img/pl2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">基于ESP32的水墨屏播放器</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/09/27/2021-9-27/" title="基于ESP32的水墨屏播放器"><img class="cover" src="/img/pl2.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-27</div><div class="title">基于ESP32的水墨屏播放器</div></div></a></div><div><a href="/2021/02/18/2021-2-18/" title="指针与引用与参数传递"><img class="cover" src="/img/casa.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-02-18</div><div class="title">指针与引用与参数传递</div></div></a></div><div><a href="/2021/03/11/2021-3-10/" title="在Vscode上配置Java"><img class="cover" src="/img/akiyama.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-10</div><div class="title">在Vscode上配置Java</div></div></a></div><div><a href="/2021/03/21/2021-3-21/" title="在Visual Studio上配置Qt框架"><img class="cover" src="/img/mrx.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-21</div><div class="title">在Visual Studio上配置Qt框架</div></div></a></div><div><a href="/2021/05/13/2021-5-13/" title="初探Java(1)-数组填充与迭代"><img class="cover" src="/img/tieo1.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-05-13</div><div class="title">初探Java(1)-数组填充与迭代</div></div></a></div><div><a href="/2021/07/24/2021-7-24/" title="初探电子电路(1)-分离元件放大电路分析方法"><img class="cover" src="/img/SW2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-07-24</div><div class="title">初探电子电路(1)-分离元件放大电路分析方法</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/unnamed.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ryujopad</div><div class="author-info__description">EE新生，前后端苦手</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">21</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/quantum818"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/quantum818" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:R8.314@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">前途是光明的，道路是曲折的</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E5%9C%A8%E8%BF%99"><span class="toc-number">1.</span> <span class="toc-text">开头在这</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">硬件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">软件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Andriod-SDK"><span class="toc-number">3.1.</span> <span class="toc-text">Andriod SDK</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Andirod-Bluetooth-Api"><span class="toc-number">3.1.1.</span> <span class="toc-text">Andirod Bluetooth Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A9%E6%B0%94Api%E8%AF%B7%E6%B1%82%E4%B8%8E%E5%A4%84%E7%90%86"><span class="toc-number">3.1.2.</span> <span class="toc-text">天气Api请求与处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8"><span class="toc-number">3.2.</span> <span class="toc-text">驱动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A31%E7%A1%AC%E4%BB%B6%E7%AE%A1%E8%84%9A%E9%80%89%E6%8B%A9"><span class="toc-number">3.2.1.</span> <span class="toc-text">串口1硬件管脚选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E4%B8%AD%E6%96%AD"><span class="toc-number">3.2.2.</span> <span class="toc-text">串口中断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHT11"><span class="toc-number">3.2.3.</span> <span class="toc-text">DHT11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.4.</span> <span class="toc-text">单总线协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">3.2.4.1.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E9%97%B4%E9%9A%99"><span class="toc-number">3.2.4.2.</span> <span class="toc-text">写间隙</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E9%97%B4%E9%9A%99"><span class="toc-number">3.2.4.3.</span> <span class="toc-text">读间隙</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%96%B02021-12-12"><span class="toc-number">5.</span> <span class="toc-text">更新2021.12.12</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%BD%E7%BB%99%E5%8F%AF%E7%88%B1%E7%9A%84%E8%93%9D%E5%8F%91%E5%A6%B9%E5%A6%B9%E7%82%B9%E4%B8%AA%E5%85%B3%E6%B3%A8%E5%90%97"><span class="toc-number">5.1.</span> <span class="toc-text">能给可爱的蓝发妹妹点个关注吗</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云"><img src="/img/SICKHACK.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="鉴证的逻辑(1)——极权国家、全民党与乌云"/></a><div class="content"><a class="title" href="/2023/04/05/2023-4-9/" title="鉴证的逻辑(1)——极权国家、全民党与乌云">鉴证的逻辑(1)——极权国家、全民党与乌云</a><time datetime="2023-04-05T08:27:56.000Z" title="发表于 2023-04-05 16:27:56">2023-04-05</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测"><img src="/img/bocchi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="利用三种卷积核算子进行图片边缘检测"/></a><div class="content"><a class="title" href="/2022/11/18/2022-11-18/" title="利用三种卷积核算子进行图片边缘检测">利用三种卷积核算子进行图片边缘检测</a><time datetime="2022-11-17T17:16:49.000Z" title="发表于 2022-11-18 01:16:49">2022-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV"><img src="/img/Ardan.jfif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在64位树莓派上部署OpenCV"/></a><div class="content"><a class="title" href="/2022/10/01/2022-10-1/" title="在64位树莓派上部署OpenCV">在64位树莓派上部署OpenCV</a><time datetime="2022-10-01T09:36:35.000Z" title="发表于 2022-10-01 17:36:35">2022-10-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"><img src="/img/Avator.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机"/></a><div class="content"><a class="title" href="/2022/05/15/2022-5-15/" title="初探Unity(1)-MMD模型导入与简单人形动画与动画状态机">初探Unity(1)-MMD模型导入与简单人形动画与动画状态机</a><time datetime="2022-05-15T14:02:30.000Z" title="发表于 2022-05-15 22:02:30">2022-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"><img src="/img/rudolf.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆"/></a><div class="content"><a class="title" href="/2022/04/17/2022-4-17/" title="明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆">明治群像录(1)——萨摩英豪传其一：历史转折中的西乡盛隆</a><time datetime="2022-04-16T18:07:10.000Z" title="发表于 2022-04-17 02:07:10">2022-04-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2025 By ryujopad</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      false && mermaid.init()
+    })
+  }
+}</script><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'fraXQvUf8J0MiqNFrpC44hJ8-gzGzoHsz',
+      appKey: 'P99TjRU8Y9Sn4OGj3JbGstsC',
+      placeholder: '欢迎大家来评论，摩多摩多~',
+      avatar: 'mp',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: true,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/umamusume.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><style>.uma_parent {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px 6px rgb(7 17 27 / 6%);
+  margin: 10px;
+  padding: 10px;
+  transition: box-shadow 0.3s;
+}
+
+.uma_parent:hover {
+  box-shadow: 0 3px 8px 6px rgba(7, 17, 27, 0.15);
+}
+
+#uma-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.umamusume-newUma {
+  background: #ff3852
+}
+
+.umamusume-twitter {
+  background: #ff9406
+}
+
+.umamusume-supportCard {
+  background: #00b7ee
+}
+
+.umamusume-notice {
+  background: #ff6f49
+}
+
+.umamusume-notice-ad {
+  background: #332B33
+}
+
+.umamusume-activity {
+  background: #f86400
+}
+
+.umamusume-list-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.umamusume-title {
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.umamusume-hotness {
+  margin: 3px 5px;
+  padding: 1px 4px;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 12px;
+}</style><script>let html = '<div class="uma-list">';
+
+let uma_parent = document.createElement("div");
+uma_parent.classList.add("uma_parent");
+
+let uma_container = document.createElement("div");
+uma_container.setAttribute("id", "uma-container");
+
+let hotness = {
+  日服公告: "umamusume-notice-ad",
+  周报速览: "umamusume-twitter",
+  当前活动: "umamusume-activity",
+  马娘卡池: "umamusume-newUma",
+  支援卡池: "umamusume-supportCard",
+};
+var url = "https://wiki.biligame.com/umamusume/api.php";
+var targetUrl = "https://wiki.biligame.com/umamusume/";
+var params1 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "公告",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params2 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "赛马娘卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params3 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "剧情活动",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params4 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "支援卡卡池",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+var params5 = {
+  action: "query",
+  format: "json",
+  list: "search",
+  srsearch: "竞技场周报",
+  srsort: "last_edit_desc",
+  srwhat: "text",
+  srprop: "size|wordcount|timestamp|snippet",
+};
+url = url + "?origin=*";
+//
+Object.keys(params1).forEach(function (key) {
+  url += "&" + key + "=" + params1[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["日服公告"] +
+      '">' +
+      "日服公告" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[0].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[0].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[0].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params2).forEach(function (key) {
+  url += "&" + key + "=" + params2[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["马娘卡池"] +
+      '">' +
+      "马娘卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params4).forEach(function (key) {
+  url += "&" + key + "=" + params4[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for (var data in response.query.search) {
+      if (response.query.search[data].title.indexOf("卡池") != -1) {
+        break;
+      }
+    }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["支援卡池"] +
+      '">' +
+      "支援卡池" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+//
+Object.keys(params3).forEach(function (key) {
+  url += "&" + key + "=" + params3[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("活动")!=-1){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["当前活动"] +
+      '">' +
+      "当前活动" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+Object.keys(params5).forEach(function (key) {
+  url += "&" + key + "=" + params5[key];
+});
+fetch(url)
+  .then((response) => response.json())
+  .then((response) => {
+    for(var data in response.query.search){
+      if(response.query.search[data].title.indexOf("繁中")==-1 && data != 0){
+          break;
+      }
+  }
+    html +=
+      '<div class="umamusume-list-item"><div class="umamusume-hotness ' +
+      hotness["周报速览"] +
+      '">' +
+      "周报速览" +
+      "</div>" +
+      '<span class="umamusume-title"><a title="' +
+      response.query.search[data].title +
+      '"href="' +
+      targetUrl +
+      response.query.search[data].title +
+      '" target="_blank" rel="external nofollow noreferrer">' +
+      response.query.search[data].title +
+      "</a></span>" +
+      "</div>";
+    html += "</div>";
+    uma_container.innerHTML = html;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+const jx_div = document.createElement("div");
+jx_div.innerHTML = `<i class="fas fa-horse-head"> UMA特雷森校历 </i>`;
+jx_div.classList.add("jx");
+uma_parent.appendChild(jx_div);
+uma_parent.appendChild(uma_container);
+
+const card = document.getElementsByTagName("uma-card")[0];
+card.parentNode.replaceChild(uma_parent, card);
+</script><!-- hexo injector body_end end --></body></html>
